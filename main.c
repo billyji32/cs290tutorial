@@ -39,7 +39,7 @@ int main (int argc, const char * argv[]) {
 	hashTable = createMap(tableSize);	   /*Create a new hashMap*/
 	fileptr = fopen(filename, "r");/*Open the file*/
 	assert(fileptr != NULL);/*Check that the file opened properly*/
-	int value;/*Used to receive the value at the key*/
+	int * value;/*Used to receive the value at the key*/
 
 
 	for (char* word = getWord(fileptr); word != NULL; word = getWord(fileptr)) /*While the file hasn't reached the end*/
@@ -47,9 +47,9 @@ int main (int argc, const char * argv[]) {
 			if (containsKey(hashTable, word) == 1) { 
 			/*If the key is already in the hash table, get the current value at that key and increment it by 1. 
 			Then reinsert that key with the new value*/
-				value = (int)atMap(hashTable, word);
-				value++;
-				insertMap(hashTable, word, value);					
+				value = atMap(hashTable, word);
+				*value+=1;
+				insertMap(hashTable, word, *value);					
 			}
 
 			else
